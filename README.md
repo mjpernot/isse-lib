@@ -8,9 +8,7 @@
 ###  This README file is broken down into the following sections:
  * Prerequisites
  * Installation
- * Configuration
  * Program Description
- * Program Help Function
  * Testing
    - Unit
 
@@ -18,8 +16,6 @@
 # Prerequisites:
 
   * List of Linux packages that need to be installed on the server.
-    - python-libs
-    - python-devel
     - git
     - python-pip
 
@@ -125,25 +121,17 @@ pip install -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic
 exit
 ```
 
-# Unit test runs for isse_guard_class.py:
+### Testing:
   * Replace **{Python_Project}** with the baseline path of the python program.
 
 ```
 cd {Python_Project}/isse-lib
-```
-
-### Unit:  
-```
-test/unit/isse_guard_class/
-```
-
-### All unit testing
-```
 test/unit/isse_guard_class/unit_test_run.sh
 ```
 
-### Code coverage program
+### Code Coverage:
 ```
+cd {Python_Project}/isse-lib
 test/unit/isse_guard_class/code_coverage.sh
 ```
 
