@@ -9,6 +9,7 @@ coverage erase
 echo ""
 echo "Running unit test modules in conjunction with coverage"
 coverage run -a --source=isse_guard_class test/unit/isse_guard_class/isseguard_init.py
+coverage run -a --source=isse_guard_class test/unit/isse_guard_class/isseguard_set_other_files.py
 
 echo ""
 echo "Producing code coverage report"
