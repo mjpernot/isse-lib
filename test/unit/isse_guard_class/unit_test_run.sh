@@ -11,4 +11,5 @@ test/unit/isse_guard_class/isseguard_set_other_files.py
 test/unit/isse_guard_class/moveto_get_files.py
 test/unit/isse_guard_class/moveto_init.py
 test/unit/isse_guard_class/movetofile_init.py
+test/unit/isse_guard_class/movetofile_parse_xml_file.py
 

@@ -13,6 +13,7 @@ coverage run -a --source=isse_guard_class test/unit/isse_guard_class/isseguard_s
 coverage run -a --source=isse_guard_class test/unit/isse_guard_class/moveto_get_files.py
 coverage run -a --source=isse_guard_class test/unit/isse_guard_class/moveto_init.py
 coverage run -a --source=isse_guard_class test/unit/isse_guard_class/movetofile_init.py
+coverage run -a --source=isse_guard_class test/unit/isse_guard_class/movetofile_parse_xml_file.py
 
 echo ""
 echo "Producing code coverage report"
