@@ -21,6 +21,7 @@ pipeline {
                 ./test/unit/isse_guard_class/moveto_init.py
                 ./test/unit/isse_guard_class/movetofile_init.py
                 ./test/unit/isse_guard_class/movetofile_parse_xml_file.py
+                ./test/unit/isse_guard_class/movetofile_process_product.py
                 deactivate
                 rm -rf test_env
                 """
