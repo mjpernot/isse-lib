@@ -7,4 +7,5 @@
 echo ""
 echo "Unit test:  git_class.py"
 test/unit/isse_guard_class/isseguard_init.py
+test/unit/isse_guard_class/isseguard_set_other_files.py
 
