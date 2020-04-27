@@ -25,7 +25,6 @@ import xml.etree.ElementTree as ET
 import lib.gen_libs as gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -36,10 +35,6 @@ class IsseGuard(object):
     Description:  Class which is a representation of a ISSE Guard transfer.  A
         guard object is used as proxy to implement the transfer of documents
         from the a file location to an ISSE Guard system.
-
-    Super-Class:  object
-
-    Sub-Classes:
 
     Methods:
         __init__ -> Class instance initilization.
@@ -64,8 +59,6 @@ class IsseGuard(object):
             (input) files -> File path or array of filepaths for sending.
             (input) keep -> Keep source files from files argument or delete
                 them.  Default = False.
-            (input)  **kwargs:
-                None
 
         """
 
@@ -153,8 +146,6 @@ class IsseGuard(object):
 
         Arguments:
             (input)  add_to_list -> Additional files to be added to the array.
-            (input)  **kwargs:
-                None
 
         """
 
@@ -215,11 +206,6 @@ class MoveTo(object):
         the moving of documents from the a file location to the reviewed
         directory.
 
-    Super-Class:  object
-
-    Sub-Classes:
-        MoveToFile
-
     Methods:
         __init__ -> Class instance initilization.
         get_files -> Get list of files to be processed.
@@ -234,8 +220,6 @@ class MoveTo(object):
 
         Arguments:
             (input) dissem_dir -> Dissemination directory for new products.
-            (input)  **kwargs:
-                None
 
         """
 
@@ -264,8 +248,6 @@ class MoveTo(object):
         Description:  Get list of html files to be processed.
 
         Arguments:
-            (input)  **kwargs:
-                None
 
         """
 
@@ -280,10 +262,6 @@ class MoveToFile(MoveTo):
         moving pre-approved documents to reviewed.  A MoveToFile object is
         used as a proxy to implement the processing, checking, and moving of a
         file from a directory location to the reviewed directory.
-
-    Super-Class:  MoveTo
-
-    Sub-Classes:
 
     Methods:
         __init__ -> Class instance initilization.
@@ -304,8 +282,6 @@ class MoveToFile(MoveTo):
             (input) file_path -> Directory path and file to be processed.
             (input) review_dir -> Review directory where file will be moved to.
             (input) dissem_dir -> Dissemination directory for new products.
-            (input) **kwargs:
-                None
 
         """
 
@@ -343,8 +319,6 @@ class MoveToFile(MoveTo):
         Description:  Parse the XML file using ElementTree library.
 
         Arguments:
-            (input) **kwargs:
-                None
 
         """
 
@@ -377,8 +351,6 @@ class MoveToFile(MoveTo):
             requirements.
 
         Arguments:
-            (input) **kwargs:
-                None
 
         """
 
@@ -401,8 +373,6 @@ class MoveToFile(MoveTo):
 
         Arguments:
             (input) file_name -> File name to add to zip list.
-            (input) **kwargs:
-                None
 
         """
 
@@ -416,8 +386,6 @@ class MoveToFile(MoveTo):
 
         Arguments:
             (input) file_name -> File name to add to clean up list.
-            (input) **kwargs:
-                None
 
         """
 
