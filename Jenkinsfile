@@ -16,6 +16,7 @@ pipeline {
                 source test_env/bin/activate
                 pip2 install mock==2.0.0 --user
                 ./test/unit/isse_guard_class/isseguard_init.py
+                ./test/unit/isse_guard_class/isseguard_set_other_files.py
                 deactivate
                 rm -rf test_env
                 """
