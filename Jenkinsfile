@@ -19,6 +19,7 @@ pipeline {
                 ./test/unit/isse_guard_class/isseguard_set_other_files.py
                 ./test/unit/isse_guard_class/moveto_get_files.py
                 ./test/unit/isse_guard_class/moveto_init.py
+                ./test/unit/isse_guard_class/movetofile_add_to_cleanup.py
                 ./test/unit/isse_guard_class/movetofile_add_to_zip.py
                 ./test/unit/isse_guard_class/movetofile_init.py
                 ./test/unit/isse_guard_class/movetofile_parse_xml_file.py
@@ -52,19 +53,19 @@ pipeline {
                                 "pattern": "./*.py",
                                 "recursive": false,
                                 "excludePatterns": [],
-                                "target": "generic-local/highpoint/git-lib/"
+                                "target": "pypi-proj-local/highpoint/git-lib/"
                             },
                             {
                                 "pattern": "./*.txt",
                                 "recursive": false,
                                 "excludePatterns": [],
-                                "target": "generic-local/highpoint/git-lib/"
+                                "target": "pypi-proj-local/highpoint/git-lib/"
                             },
                             {
                                 "pattern": "./*.md",
                                 "recursive": false,
                                 "excludePatterns": [],
-                                "target": "generic-local/highpoint/git-lib/"
+                                "target": "pypi-proj-local/highpoint/git-lib/"
                             }
                         ]
                     }"""
