@@ -44,6 +44,13 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_network_bices -> Test with network set to bices.
+        test_network_cw -> Test with network set to cw.
+        test_network_sipr -> Test with network set to sipr.
+        test_add_to_list_two -> Test with add_to_list with two items.
+        test_add_to_list_one -> Test with add_to_list with one item.
+        test_add_to_list_empty -> Test with add_to_list as empty list.
+        test_add_to_list_none -> Test with add_to_list is not passed.
         test_init_default -> Test with default values set.
 
     """
@@ -95,6 +102,8 @@ class UnitTest(unittest.TestCase):
         self.keep = True
 
         self.target = "JWICStoSIPRtransfer"
+        self.target2 = "JWICStoCWtransfer"
+        self.target3 = "JWICStoBICEStransfer"
         self.name = "SERVICE-ISSE-TRANSFER-SIPR-process"
         self.prog_log = self.cfg.log_dir + self.name + ".log"
         self.review_dir = self.cfg.transfer_dir + self.target + "/reviewed"
@@ -110,6 +119,158 @@ class UnitTest(unittest.TestCase):
             "*-highpoint-app.zip": False,
             "*-IS-PULLED-*": True,
             "*-RELA-PULLED-*": True}
+        self.add_to_list = ["One"]
+        self.add_to_list2 = list(self.add_to_list)
+        self.add_to_list2.append("Two")
+        self.other_files2 = dict(self.other_files)
+        self.other_file_types2 = dict(self.other_file_types)
+        self.other_files2["One"] = False
+        self.other_file_types2["One"] = True
+        self.other_files3 = dict(self.other_files2)
+        self.other_file_types3 = dict(self.other_file_types2)
+        self.other_files3["Two"] = False
+        self.other_file_types3["Two"] = True
+        self.review_dir2 = self.cfg.transfer_dir + self.target2 + "/reviewed"
+        self.other_file_types4 = {
+            self.review_dir2 + "/lookup.xml": True,
+            self.review_dir2 + "/benumber_lookup.xml": True,
+            "*-highpoint-app.zip": True,
+            "*-CW-PULLED-*": True,
+            "SG-SERVER-PKI.zip": True}
+        self.other_files4 = {
+            self.review_dir2 + "/lookup.xml": False,
+            self.review_dir2 + "/benumber_lookup.xml": False,
+            "*-highpoint-app.zip": False,
+            "*-CW-PULLED-*": True,
+            "SG-SERVER-PKI.zip": False}
+        self.other_file_types5 = {}
+        self.other_files5 = {}
+
+    @mock.patch("isse_guard_class.gen_libs.chk_crt_dir",
+                mock.Mock(return_value=(True, None)))
+    def test_network_bices(self):
+
+        """Function:  test_network_bices
+
+        Description:  Test with network set to bices.
+
+        Arguments:
+
+        """
+
+        isse = isse_guard_class.IsseGuard(self.network_bices, self.cfg)
+        isse.set_other_files()
+
+        self.assertEqual((isse.other_files, isse.other_file_types),
+                         (self.other_files5, self.other_file_types5))
+
+    @mock.patch("isse_guard_class.gen_libs.chk_crt_dir",
+                mock.Mock(return_value=(True, None)))
+    def test_network_cw(self):
+
+        """Function:  test_network_cw
+
+        Description:  Test with network set to cw.
+
+        Arguments:
+
+        """
+
+        isse = isse_guard_class.IsseGuard(self.network_cw, self.cfg)
+        isse.set_other_files()
+
+        self.assertEqual((isse.other_files, isse.other_file_types),
+                         (self.other_files4, self.other_file_types4))
+
+    @mock.patch("isse_guard_class.gen_libs.chk_crt_dir",
+                mock.Mock(return_value=(True, None)))
+    def test_network_sipr(self):
+
+        """Function:  test_network_sipr
+
+        Description:  Test with network set to sipr.
+
+        Arguments:
+
+        """
+
+        isse = isse_guard_class.IsseGuard(self.network_sipr, self.cfg)
+        isse.set_other_files()
+
+        self.assertEqual((isse.other_files, isse.other_file_types),
+                         (self.other_files, self.other_file_types))
+
+    @mock.patch("isse_guard_class.gen_libs.chk_crt_dir",
+                mock.Mock(return_value=(True, None)))
+    def test_add_to_list_two(self):
+
+        """Function:  test_add_to_list_two
+
+        Description:  Test with add_to_list with two items.
+
+        Arguments:
+
+        """
+
+        isse = isse_guard_class.IsseGuard(self.network_sipr, self.cfg)
+        isse.set_other_files(add_to_list=self.add_to_list2)
+
+        self.assertEqual((isse.other_files, isse.other_file_types),
+                         (self.other_files3, self.other_file_types3))
+
+    @mock.patch("isse_guard_class.gen_libs.chk_crt_dir",
+                mock.Mock(return_value=(True, None)))
+    def test_add_to_list_one(self):
+
+        """Function:  test_add_to_list_one
+
+        Description:  Test with add_to_list with one item.
+
+        Arguments:
+
+        """
+
+        isse = isse_guard_class.IsseGuard(self.network_sipr, self.cfg)
+        isse.set_other_files(add_to_list=self.add_to_list)
+
+        self.assertEqual((isse.other_files, isse.other_file_types),
+                         (self.other_files2, self.other_file_types2))
+
+    @mock.patch("isse_guard_class.gen_libs.chk_crt_dir",
+                mock.Mock(return_value=(True, None)))
+    def test_add_to_list_empty(self):
+
+        """Function:  test_add_to_list_empty
+
+        Description:  Test with add_to_list as empty list.
+
+        Arguments:
+
+        """
+
+        isse = isse_guard_class.IsseGuard(self.network_sipr, self.cfg)
+        isse.set_other_files(add_to_list=[])
+
+        self.assertEqual((isse.other_files, isse.other_file_types),
+                         (self.other_files, self.other_file_types))
+
+    @mock.patch("isse_guard_class.gen_libs.chk_crt_dir",
+                mock.Mock(return_value=(True, None)))
+    def test_add_to_list_none(self):
+
+        """Function:  test_add_to_list_none
+
+        Description:  Test with add_to_list is not passed.
+
+        Arguments:
+
+        """
+
+        isse = isse_guard_class.IsseGuard(self.network_sipr, self.cfg)
+        isse.set_other_files()
+
+        self.assertEqual((isse.other_files, isse.other_file_types),
+                         (self.other_files, self.other_file_types))
 
     @mock.patch("isse_guard_class.gen_libs.chk_crt_dir",
                 mock.Mock(return_value=(True, None)))
