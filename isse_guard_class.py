@@ -152,6 +152,9 @@ class IsseGuard(object):
         if add_to_list is None:
             add_to_list = []
 
+        else:
+            add_to_list = list(add_to_list)
+
         if self.network == "BICES":
             self.other_files = {}
 
