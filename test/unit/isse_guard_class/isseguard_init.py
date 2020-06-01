@@ -43,6 +43,11 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_files_list -> Test with list for files.
+        test_files_string -> Test with string for files.
+        test_files_empty_string -> Test with empty string for files.
+        test_files_empty_list -> Test with empty list for files.
+        test_files_not_passed -> Test with files not passed.
         test_init_default -> Test with default values set.
 
     """
@@ -97,6 +102,91 @@ class UnitTest(unittest.TestCase):
         self.prog_log = self.cfg.log_dir + self.name + ".log"
         self.review_dir = self.cfg.transfer_dir + self.target + "/reviewed"
         self.backup = self.cfg.backup
+        self.files = ["DataFile1", "DataFile2"]
+
+    @mock.patch("isse_guard_class.gen_libs.chk_crt_dir",
+                mock.Mock(return_value=(True, None)))
+    def test_files_list(self):
+
+        """Function:  test_files_list
+
+        Description:  Test with list for files.
+
+        Arguments:
+
+        """
+
+        isse = isse_guard_class.IsseGuard(self.network_sipr, self.cfg,
+                                          files=self.files)
+
+        self.assertEqual(isse.files, ["DataFile1", "DataFile2"])
+
+    @mock.patch("isse_guard_class.gen_libs.chk_crt_dir",
+                mock.Mock(return_value=(True, None)))
+    def test_files_string(self):
+
+        """Function:  test_files_string
+
+        Description:  Test with string for files.
+
+        Arguments:
+
+        """
+
+        isse = isse_guard_class.IsseGuard(self.network_sipr, self.cfg,
+                                          files="DataFile")
+
+        self.assertEqual(isse.files, "DataFile")
+
+    @mock.patch("isse_guard_class.gen_libs.chk_crt_dir",
+                mock.Mock(return_value=(True, None)))
+    def test_files_empty_string(self):
+
+        """Function:  test_files_empty_string
+
+        Description:  Test with empty list for files.
+
+        Arguments:
+
+        """
+
+        isse = isse_guard_class.IsseGuard(self.network_sipr, self.cfg,
+                                          files="")
+
+        self.assertEqual(isse.files, "")
+
+    @mock.patch("isse_guard_class.gen_libs.chk_crt_dir",
+                mock.Mock(return_value=(True, None)))
+    def test_files_empty_list(self):
+
+        """Function:  test_files_empty_list
+
+        Description:  Test with empty list for files.
+
+        Arguments:
+
+        """
+
+        isse = isse_guard_class.IsseGuard(self.network_sipr, self.cfg,
+                                          files=[])
+
+        self.assertEqual(isse.files, [])
+
+    @mock.patch("isse_guard_class.gen_libs.chk_crt_dir",
+                mock.Mock(return_value=(True, None)))
+    def test_files_not_passed(self):
+
+        """Function:  test_files_not_passed
+
+        Description:  Test with files not passed.
+
+        Arguments:
+
+        """
+
+        isse = isse_guard_class.IsseGuard(self.network_sipr, self.cfg)
+
+        self.assertEqual(isse.files, None)
 
     @mock.patch("isse_guard_class.gen_libs.chk_crt_dir",
                 mock.Mock(return_value=(True, None)))
