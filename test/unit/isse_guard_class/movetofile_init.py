@@ -42,6 +42,10 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_review_with_sep -> Test with path seperator in review_dir.
+        test_review_miss_sep -> Test with missing path seperator in review_dir.
+        test_dissem_with_sep -> Test with path seperator in dissem_dir.
+        test_dissem_miss_sep -> Test with missing path seperator in dissem_dir.
         test_init_default -> Test with default values set.
 
     """
@@ -58,8 +62,74 @@ class UnitTest(unittest.TestCase):
 
         self.fname = "File1.html"
         self.dissem_dir = "./test/unit/isse_guard_class/tmp"
+        self.dissem_dir2 = "./test/unit/isse_guard_class/tmp/"
         self.file_path = os.path.join(self.dissem_dir, self.fname)
         self.review_dir = self.dissem_dir
+        self.review_dir2 = self.dissem_dir + "/"
+
+    def test_review_with_sep(self):
+
+        """Function:  test_review_with_sep
+
+        Description:  Test with path seperator in review_dir.
+
+        Arguments:
+
+        """
+
+        isse = isse_guard_class.MoveToFile(self.file_path, self.review_dir2,
+                                           self.dissem_dir)
+
+        self.assertEqual((isse.cur_file_name, isse.cur_file_dir),
+                         (self.fname, self.dissem_dir))
+
+    def test_review_miss_sep(self):
+
+        """Function:  test_review_miss_sep
+
+        Description:  Test with missing path seperator in review_dir.
+
+        Arguments:
+
+        """
+
+        isse = isse_guard_class.MoveToFile(self.file_path, self.review_dir,
+                                           self.dissem_dir)
+
+        self.assertEqual((isse.cur_file_name, isse.cur_file_dir),
+                         (self.fname, self.dissem_dir))
+
+    def test_dissem_with_sep(self):
+
+        """Function:  test_dissem_with_sep
+
+        Description:  Test with path seperator in dissem_dir.
+
+        Arguments:
+
+        """
+
+        isse = isse_guard_class.MoveToFile(self.file_path, self.review_dir,
+                                           self.dissem_dir2)
+
+        self.assertEqual((isse.cur_file_name, isse.cur_file_dir),
+                         (self.fname, self.dissem_dir))
+
+    def test_dissem_miss_sep(self):
+
+        """Function:  test_dissem_miss_sep
+
+        Description:  Test with missing path seperator in dissem_dir.
+
+        Arguments:
+
+        """
+
+        isse = isse_guard_class.MoveToFile(self.file_path, self.review_dir,
+                                           self.dissem_dir)
+
+        self.assertEqual((isse.cur_file_name, isse.cur_file_dir),
+                         (self.fname, self.dissem_dir))
 
     def test_init_default(self):
 
