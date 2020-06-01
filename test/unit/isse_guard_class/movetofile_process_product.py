@@ -43,6 +43,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_product_not_in_list -> Test with product not in product_list.
+        test_product_in_list -> Test with product in product_list.
         test_parse_xml_file_default -> Test with default values set.
 
     """
@@ -62,6 +64,42 @@ class UnitTest(unittest.TestCase):
         self.file_path = os.path.join(self.dissem_dir, self.fname)
         self.review_dir = self.dissem_dir
         self.object_id = "0901File1"
+
+    def test_product_not_in_list(self):
+
+        """Function:  test_product_not_in_list
+
+        Description:  Test with product not in product_list.
+
+        Arguments:
+
+        """
+
+        isse = isse_guard_class.MoveToFile(self.file_path, self.review_dir,
+                                           self.dissem_dir)
+        isse.product_line = "Not in list"
+        isse.process_product()
+
+        self.assertEqual((isse.cur_file_name, isse.object_id),
+                         (self.fname, ""))
+
+    def test_product_in_list(self):
+
+        """Function:  test_product_in_list
+
+        Description:  Test with product in product_list.
+
+        Arguments:
+
+        """
+
+        isse = isse_guard_class.MoveToFile(self.file_path, self.review_dir,
+                                           self.dissem_dir)
+        isse.product_line = "Maritime Op Intel Brief"
+        isse.process_product()
+
+        self.assertEqual((isse.cur_file_name, isse.object_id),
+                         (self.fname, self.object_id))
 
     def test_parse_xml_file_default(self):
 
