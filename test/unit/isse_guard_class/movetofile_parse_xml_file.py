@@ -57,8 +57,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.fname = "File1.html"
-        self.dissem_dir = "./test/unit/isse_guard_class/tmp"
+        self.fname = "test.xml"
+        self.dissem_dir = "./test/unit/isse_guard_class/basefiles"
         self.file_path = os.path.join(self.dissem_dir, self.fname)
         self.review_dir = self.dissem_dir
 
