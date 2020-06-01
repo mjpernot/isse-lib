@@ -92,6 +92,9 @@ class UnitTest(unittest.TestCase):
                     "./test/unit/isse_guard_class/tmp/transfer_dir"
                 self.backup = True
 
+        self.lookup = "/lookup.xml"
+        self.benumber = "/benumber_lookup.xml"
+        self.hp_app = "*-highpoint-app.zip"
         self.network_sipr = "SIPR"
         self.network_bices = "BICES"
         self.network_cw = "CW"
@@ -108,15 +111,15 @@ class UnitTest(unittest.TestCase):
         self.prog_log = self.cfg.log_dir + self.name + ".log"
         self.review_dir = self.cfg.transfer_dir + self.target + "/reviewed"
         self.other_file_types = {
-            self.review_dir + "/lookup.xml": True,
-            self.review_dir + "/benumber_lookup.xml": True,
-            "*-highpoint-app.zip": True,
+            self.review_dir + self.lookup: True,
+            self.review_dir + self.benumber: True,
+            self.hp_app: True,
             "*-IS-PULLED-*": True,
             "*-RELA-PULLED-*": True}
         self.other_files = {
-            self.review_dir + "/lookup.xml": False,
-            self.review_dir + "/benumber_lookup.xml": False,
-            "*-highpoint-app.zip": False,
+            self.review_dir + self.lookup: False,
+            self.review_dir + self.benumber: False,
+            self.hp_app: False,
             "*-IS-PULLED-*": True,
             "*-RELA-PULLED-*": True}
         self.add_to_list = ["One"]
@@ -132,15 +135,15 @@ class UnitTest(unittest.TestCase):
         self.other_file_types3["Two"] = True
         self.review_dir2 = self.cfg.transfer_dir + self.target2 + "/reviewed"
         self.other_file_types4 = {
-            self.review_dir2 + "/lookup.xml": True,
-            self.review_dir2 + "/benumber_lookup.xml": True,
-            "*-highpoint-app.zip": True,
+            self.review_dir2 + self.lookup: True,
+            self.review_dir2 + self.benumber: True,
+            self.hp_app: True,
             "*-CW-PULLED-*": True,
             "SG-SERVER-PKI.zip": True}
         self.other_files4 = {
-            self.review_dir2 + "/lookup.xml": False,
-            self.review_dir2 + "/benumber_lookup.xml": False,
-            "*-highpoint-app.zip": False,
+            self.review_dir2 + self.lookup: False,
+            self.review_dir2 + self.benumber: False,
+            self.hp_app: False,
             "*-CW-PULLED-*": True,
             "SG-SERVER-PKI.zip": False}
         self.other_file_types5 = {}
