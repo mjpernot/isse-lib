@@ -62,6 +62,12 @@ class IsseGuard(object):
 
         """
 
+        if isinstance(files, list):
+            self.files = list(files)
+
+        else:
+            self.files = files
+
         # Contains directory structure for specified network enclave.
         network_target_dict = {
             "SIPR": "JWICStoSIPRtransfer",
@@ -102,7 +108,7 @@ class IsseGuard(object):
 
         self.action = action
         self.network = network
-        self.files = files
+
         self.keep = keep
 
         self.name = "SERVICE-ISSE-TRANSFER-" + self.network + "-" + self.action
