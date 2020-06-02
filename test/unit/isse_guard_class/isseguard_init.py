@@ -94,7 +94,6 @@ class UnitTest(unittest.TestCase):
         self.network_other = "OTHER"
         self.cfg = CfgTest()
         self.action = "process"
-        self.files = "./test/unit/isse_guard_class/tmp"
         self.keep = True
         self.name = "SERVICE-ISSE-TRANSFER-SIPR-process"
         self.target = "JWICStoSIPRtransfer"
