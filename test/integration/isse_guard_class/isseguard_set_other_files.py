@@ -18,6 +18,7 @@
 # Standard
 import sys
 import os
+import shutil
 
 if sys.version_info < (2, 7):
     import unittest2 as unittest
@@ -25,7 +26,6 @@ else:
     import unittest
 
 # Third-party
-import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -152,8 +152,6 @@ class UnitTest(unittest.TestCase):
         self.other_file_types5 = {}
         self.other_files5 = {}
 
-    @mock.patch("isse_guard_class.gen_libs.chk_crt_dir",
-                mock.Mock(return_value=(True, None)))
     def test_network_bices(self):
 
         """Function:  test_network_bices
@@ -170,8 +168,6 @@ class UnitTest(unittest.TestCase):
         self.assertEqual((isse.other_files, isse.other_file_types),
                          (self.other_files5, self.other_file_types5))
 
-    @mock.patch("isse_guard_class.gen_libs.chk_crt_dir",
-                mock.Mock(return_value=(True, None)))
     def test_network_cw(self):
 
         """Function:  test_network_cw
@@ -188,8 +184,6 @@ class UnitTest(unittest.TestCase):
         self.assertEqual((isse.other_files, isse.other_file_types),
                          (self.other_files4, self.other_file_types4))
 
-    @mock.patch("isse_guard_class.gen_libs.chk_crt_dir",
-                mock.Mock(return_value=(True, None)))
     def test_network_sipr(self):
 
         """Function:  test_network_sipr
@@ -206,8 +200,6 @@ class UnitTest(unittest.TestCase):
         self.assertEqual((isse.other_files, isse.other_file_types),
                          (self.other_files, self.other_file_types))
 
-    @mock.patch("isse_guard_class.gen_libs.chk_crt_dir",
-                mock.Mock(return_value=(True, None)))
     def test_add_to_list_two(self):
 
         """Function:  test_add_to_list_two
@@ -224,8 +216,6 @@ class UnitTest(unittest.TestCase):
         self.assertEqual((isse.other_files, isse.other_file_types),
                          (self.other_files3, self.other_file_types3))
 
-    @mock.patch("isse_guard_class.gen_libs.chk_crt_dir",
-                mock.Mock(return_value=(True, None)))
     def test_add_to_list_one(self):
 
         """Function:  test_add_to_list_one
@@ -242,8 +232,6 @@ class UnitTest(unittest.TestCase):
         self.assertEqual((isse.other_files, isse.other_file_types),
                          (self.other_files2, self.other_file_types2))
 
-    @mock.patch("isse_guard_class.gen_libs.chk_crt_dir",
-                mock.Mock(return_value=(True, None)))
     def test_add_to_list_empty(self):
 
         """Function:  test_add_to_list_empty
@@ -260,8 +248,6 @@ class UnitTest(unittest.TestCase):
         self.assertEqual((isse.other_files, isse.other_file_types),
                          (self.other_files, self.other_file_types))
 
-    @mock.patch("isse_guard_class.gen_libs.chk_crt_dir",
-                mock.Mock(return_value=(True, None)))
     def test_add_to_list_none(self):
 
         """Function:  test_add_to_list_none
@@ -278,8 +264,6 @@ class UnitTest(unittest.TestCase):
         self.assertEqual((isse.other_files, isse.other_file_types),
                          (self.other_files, self.other_file_types))
 
-    @mock.patch("isse_guard_class.gen_libs.chk_crt_dir",
-                mock.Mock(return_value=(True, None)))
     def test_set_other_files_default(self):
 
         """Function:  test_set_other_files_default
