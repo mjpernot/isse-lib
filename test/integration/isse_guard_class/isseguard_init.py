@@ -49,6 +49,7 @@ class UnitTest(unittest.TestCase):
         test_files_empty_list -> Test with empty list for files.
         test_files_not_passed -> Test with files not passed.
         test_init_default -> Test with default values set.
+        tearDown -> Clean up of unit testing.
 
     """
 
