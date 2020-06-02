@@ -4,8 +4,8 @@
 <data>
    <pubsStillImageExhibit xlinkhref="image_name.jpg">
    </pubsStillImageExhibit>
-   <pubsStillOtherExhibit xlinkhref="pdf_file.pdf">
-   </pubsStillOtherExhibit>
+   <pubsOtherExhibit xlinkhref="pdf_file.pdf">
+   </pubsOtherExhibit>
    <pubsProductLine> TEST5 </pubsProductLine>
 </data>
 
