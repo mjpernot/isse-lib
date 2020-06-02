@@ -320,6 +320,7 @@ class MoveToFile(MoveTo):
         self.media = []
         self.files_to_zip = []
         self.cleanup_list = []
+        self.product_line = None
 
     def parse_xml_file(self, **kwargs):
 
