@@ -57,11 +57,33 @@ class UnitTest(unittest.TestCase):
         """
 
         self.fname = "test.xml"
+        self.fname2 = "test2.xml"
         self.dissem_dir = "./test/unit/isse_guard_class/basefiles"
         self.file_path = os.path.join(self.dissem_dir, self.fname)
+        self.file_path2 = os.path.join(self.dissem_dir, self.fname2)
         self.review_dir = self.dissem_dir
+        self.images = ["image_name.jpg"]
+        self.images2 = ["image_name1.jpg", "image_name2.jpg"]
 
-    @unittest.skip("Error:  Require xml file to test with")
+    def test_multiple_images(self):
+
+        """Function:  test_multiple_images
+
+        Description:  Test with multiple images.
+
+        Arguments:
+
+        """
+
+        isse = isse_guard_class.MoveToFile(self.file_path2, self.review_dir,
+                                           self.dissem_dir)
+        isse.ns = {"pubs": "pubs",
+                   "xlink": "xlink"}
+        isse.parse_xml_file()
+
+        self.assertEqual((isse.cur_file_name, isse.cur_file_dir, isse.images),
+                         (self.fname2, self.dissem_dir, self.images2))
+
     def test_parse_xml_file_default(self):
 
         """Function:  test_parse_xml_file_default
@@ -74,10 +96,12 @@ class UnitTest(unittest.TestCase):
 
         isse = isse_guard_class.MoveToFile(self.file_path, self.review_dir,
                                            self.dissem_dir)
+        isse.ns = {"pubs": "pubs",
+                   "xlink": "xlink"}
         isse.parse_xml_file()
 
-        self.assertEqual((isse.cur_file_name, isse.cur_file_dir),
-                         (self.fname, self.dissem_dir))
+        self.assertEqual((isse.cur_file_name, isse.cur_file_dir, isse.images),
+                         (self.fname, self.dissem_dir, self.images))
 
 
 if __name__ == "__main__":
