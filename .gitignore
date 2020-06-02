@@ -3,3 +3,4 @@
 *.swp
 coverage.xml
 lib
+test/integration/isse_guard_class/tmp
