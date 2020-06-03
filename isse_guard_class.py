@@ -303,6 +303,7 @@ class MoveToFile(MoveTo):
 
         super(MoveToFile, self).__init__(dissem_dir)
 
+        html_str = ".html"
         self.cur_file_name = os.path.basename(file_path)
         self.cur_file_dir = os.path.dirname(file_path)
 
@@ -314,9 +315,9 @@ class MoveToFile(MoveTo):
 
         self.zip_file_path = \
             review_dir + self.org + "-" + self.tape_dir \
-            + "-" + re.sub("(?i)" + re.escape(".html"), ".zip",
+            + "-" + re.sub("(?i)" + re.escape(html_str), ".zip",
                            self.cur_file_name)
-        self.xml_file_path = re.sub("(?i)" + re.escape(".html"), ".xml",
+        self.xml_file_path = re.sub("(?i)" + re.escape(html_str), ".xml",
                                     file_path)
         self.xml_file_name = os.path.basename(self.xml_file_path)
         self.dissem_level = ""
