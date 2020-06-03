@@ -10,6 +10,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - IsseGuard.set_other_files:  Fixed problem with mutable default arguments issue.
 
 ### Changed
+- IsseGuard.set_other_files:  Converted multiple string literals to variables.
 - IsseGuard.\_\_init\_\_:  Converted multiple string literals to variables.
 - MoveToFile.\_\_init\_\_:  Initialized product_line attribute.
 - Documentation updates.

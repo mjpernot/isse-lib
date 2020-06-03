@@ -158,6 +158,10 @@ class IsseGuard(object):
 
         """
 
+        lookup_str = "/lookup.xml"
+        be_str = "/benumber_lookup.xml"
+        hp_str = "*-highpoint-app.zip"
+
         if add_to_list is None:
             add_to_list = []
 
@@ -171,9 +175,9 @@ class IsseGuard(object):
             # Other and one-off files to be transferred, value is whether the
             #   file will be backed up during the process
             self.other_files = {
-                self.review_dir + "/lookup.xml": False,
-                self.review_dir + "/benumber_lookup.xml": False,
-                "*-highpoint-app.zip": False}
+                self.review_dir + lookup_str: False,
+                self.review_dir + be_str: False,
+                hp_str: False}
 
             if self.network == "SIPR":
                 self.other_files["*-IS-PULLED-*"] = True
@@ -189,16 +193,16 @@ class IsseGuard(object):
         #   what is in self.other_files for each network enclave.
         other_file_types_dict = {
             "SIPR": {
-                self.review_dir + "/lookup.xml": True,
-                self.review_dir + "/benumber_lookup.xml": True,
-                "*-highpoint-app.zip": True,
+                self.review_dir + lookup_str: True,
+                self.review_dir + be_str: True,
+                hp_str: True,
                 "*-IS-PULLED-*": True,
                 "*-RELA-PULLED-*": True},
             "BICES": {},
             "CW": {
-                self.review_dir + "/lookup.xml": True,
-                self.review_dir + "/benumber_lookup.xml": True,
-                "*-highpoint-app.zip": True,
+                self.review_dir + lookup_str: True,
+                self.review_dir + be_str: True,
+                hp_str: True,
                 "*-CW-PULLED-*": True,
                 "SG-SERVER-PKI.zip": True}}
 
