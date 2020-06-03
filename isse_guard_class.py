@@ -62,6 +62,9 @@ class IsseGuard(object):
 
         """
 
+        zip_str = "*.zip"
+        html_str = "*.html"
+
         if isinstance(files, list):
             self.files = list(files)
 
@@ -85,20 +88,20 @@ class IsseGuard(object):
         #   file type.
         file_types_dict = {
             "SIPR": {
-                "*.zip": {"MD5": True, "Base64": False},
+                zip_str: {"MD5": True, "Base64": False},
                 "*.kmz": {"MD5": True, "Base64": True},
                 "*.pptx": {"MD5": True, "Base64": True},
-                "*.html": {"MD5": True, "Base64": False},
+                html_str: {"MD5": True, "Base64": False},
                 "*_zip.64.txt": {"MD5": True, "Base64": False}},
             "BICES": {
-                "*.zip": {"MD5": False, "Base64": False},
+                zip_str: {"MD5": False, "Base64": False},
                 "*.pdf": {"MD5": False, "Base64": False},
                 "*metadata.xml": {"MD5": False, "Base64": False}},
             "CW": {
-                "*.zip": {"MD5": True, "Base64": False},
+                zip_str: {"MD5": True, "Base64": False},
                 "*.kmz": {"MD5": True, "Base64": True},
                 "*.pptx": {"MD5": True, "Base64": True},
-                "*.html": {"MD5": True, "Base64": False},
+                html_str: {"MD5": True, "Base64": False},
                 "*_zip.64.txt": {"MD5": True, "Base64": False}}}
 
         dtg = datetime.datetime.strftime(datetime.datetime.now(),
