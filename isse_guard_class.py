@@ -372,7 +372,8 @@ class MoveToFile(MoveTo):
 
         """
 
-        docid_regex = "[0-9]{8}-[0-9]{4}-"
+        year_regex = "[0-9]{4}-"
+        docid_regex = "[0-9]{8}-" + year_regex
         docid_regex2 = docid_regex + ".*0901"
 
         if self.product_line in self.product_list:
