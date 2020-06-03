@@ -372,20 +372,20 @@ class MoveToFile(MoveTo):
 
         """
 
+        # Done this way due to SonarQube finding.
         year_regex = "[0-9]{4}-"
         docid_regex = "[0-9]{8}-" + year_regex
         docid_regex2 = docid_regex + ".*0901"
 
         if self.product_line in self.product_list:
             # Get document's dissemination level from file name.
-            self.dissem_level = re.sub("-090109c.*.html", "",
-                                       re.sub(docid_regex, "",
+            self.dissem_level = re.sub(
+                "-090109c.*.html", "", re.sub(docid_regex, "",
                                               self.cur_file_name))
 
             # Get document ID from file name.
-            self.object_id = "0901" + re.sub(".html", "",
-                                             re.sub(docid_regex2,
-                                                    "", self.cur_file_name))
+            self.object_id = "0901" + re.sub(
+                ".html", "", re.sub(docid_regex2, "", self.cur_file_name))
 
     def add_to_zip(self, file_name, **kwargs):
 
