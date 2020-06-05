@@ -306,6 +306,7 @@ class MoveToFile(MoveTo):
         html_str = ".html"
         self.cur_file_name = os.path.basename(file_path)
         self.cur_file_dir = os.path.dirname(file_path)
+        self.review_dir = review_dir
 
         if not self.dissem_dir.endswith(os.path.sep):
             self.dissem_dir = self.dissem_dir + os.path.sep
