@@ -1,0 +1,14 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!-- test.xml -->
+<?xml-stylesheet type = "text/xsl"  href = "test.xsl" ?>
+<data>
+   <pubsStillImageExhibit xlinkhref="image_name1.jpg">
+   </pubsStillImageExhibit>
+   <pubsStillImageExhibit xlinkhref="image_name2.jpg">
+   </pubsStillImageExhibit>
+   <pubsOtherExhibit xlinkhref="pdf_file.pdf">
+   </pubsOtherExhibit>
+   <pubsProductLine> TEST5 </pubsProductLine>
+</data>
+
+
