@@ -25,7 +25,6 @@ import xml.etree.ElementTree as ET
 import lib.gen_libs as gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -36,10 +35,6 @@ class IsseGuard(object):
     Description:  Class which is a representation of a ISSE Guard transfer.  A
         guard object is used as proxy to implement the transfer of documents
         from the a file location to an ISSE Guard system.
-
-    Super-Class:  object
-
-    Sub-Classes:
 
     Methods:
         __init__ -> Class instance initilization.
@@ -64,10 +59,17 @@ class IsseGuard(object):
             (input) files -> File path or array of filepaths for sending.
             (input) keep -> Keep source files from files argument or delete
                 them.  Default = False.
-            (input)  **kwargs:
-                None
 
         """
+
+        zip_str = "*.zip"
+        html_str = "*.html"
+
+        if isinstance(files, list):
+            self.files = list(files)
+
+        else:
+            self.files = files
 
         # Contains directory structure for specified network enclave.
         network_target_dict = {
@@ -86,20 +88,20 @@ class IsseGuard(object):
         #   file type.
         file_types_dict = {
             "SIPR": {
-                "*.zip": {"MD5": True, "Base64": False},
+                zip_str: {"MD5": True, "Base64": False},
                 "*.kmz": {"MD5": True, "Base64": True},
                 "*.pptx": {"MD5": True, "Base64": True},
-                "*.html": {"MD5": True, "Base64": False},
+                html_str: {"MD5": True, "Base64": False},
                 "*_zip.64.txt": {"MD5": True, "Base64": False}},
             "BICES": {
-                "*.zip": {"MD5": False, "Base64": False},
+                zip_str: {"MD5": False, "Base64": False},
                 "*.pdf": {"MD5": False, "Base64": False},
                 "*metadata.xml": {"MD5": False, "Base64": False}},
             "CW": {
-                "*.zip": {"MD5": True, "Base64": False},
+                zip_str: {"MD5": True, "Base64": False},
                 "*.kmz": {"MD5": True, "Base64": True},
                 "*.pptx": {"MD5": True, "Base64": True},
-                "*.html": {"MD5": True, "Base64": False},
+                html_str: {"MD5": True, "Base64": False},
                 "*_zip.64.txt": {"MD5": True, "Base64": False}}}
 
         dtg = datetime.datetime.strftime(datetime.datetime.now(),
@@ -109,7 +111,7 @@ class IsseGuard(object):
 
         self.action = action
         self.network = network
-        self.files = files
+
         self.keep = keep
 
         self.name = "SERVICE-ISSE-TRANSFER-" + self.network + "-" + self.action
@@ -153,13 +155,18 @@ class IsseGuard(object):
 
         Arguments:
             (input)  add_to_list -> Additional files to be added to the array.
-            (input)  **kwargs:
-                None
 
         """
 
+        lookup_str = "/lookup.xml"
+        be_str = "/benumber_lookup.xml"
+        hp_str = "*-highpoint-app.zip"
+
         if add_to_list is None:
             add_to_list = []
+
+        else:
+            add_to_list = list(add_to_list)
 
         if self.network == "BICES":
             self.other_files = {}
@@ -168,9 +175,9 @@ class IsseGuard(object):
             # Other and one-off files to be transferred, value is whether the
             #   file will be backed up during the process
             self.other_files = {
-                self.review_dir + "/lookup.xml": False,
-                self.review_dir + "/benumber_lookup.xml": False,
-                "*-highpoint-app.zip": False}
+                self.review_dir + lookup_str: False,
+                self.review_dir + be_str: False,
+                hp_str: False}
 
             if self.network == "SIPR":
                 self.other_files["*-IS-PULLED-*"] = True
@@ -186,16 +193,16 @@ class IsseGuard(object):
         #   what is in self.other_files for each network enclave.
         other_file_types_dict = {
             "SIPR": {
-                self.review_dir + "/lookup.xml": True,
-                self.review_dir + "/benumber_lookup.xml": True,
-                "*-highpoint-app.zip": True,
+                self.review_dir + lookup_str: True,
+                self.review_dir + be_str: True,
+                hp_str: True,
                 "*-IS-PULLED-*": True,
                 "*-RELA-PULLED-*": True},
             "BICES": {},
             "CW": {
-                self.review_dir + "/lookup.xml": True,
-                self.review_dir + "/benumber_lookup.xml": True,
-                "*-highpoint-app.zip": True,
+                self.review_dir + lookup_str: True,
+                self.review_dir + be_str: True,
+                hp_str: True,
                 "*-CW-PULLED-*": True,
                 "SG-SERVER-PKI.zip": True}}
 
@@ -215,11 +222,6 @@ class MoveTo(object):
         the moving of documents from the a file location to the reviewed
         directory.
 
-    Super-Class:  object
-
-    Sub-Classes:
-        MoveToFile
-
     Methods:
         __init__ -> Class instance initilization.
         get_files -> Get list of files to be processed.
@@ -234,8 +236,6 @@ class MoveTo(object):
 
         Arguments:
             (input) dissem_dir -> Dissemination directory for new products.
-            (input)  **kwargs:
-                None
 
         """
 
@@ -264,8 +264,6 @@ class MoveTo(object):
         Description:  Get list of html files to be processed.
 
         Arguments:
-            (input)  **kwargs:
-                None
 
         """
 
@@ -280,10 +278,6 @@ class MoveToFile(MoveTo):
         moving pre-approved documents to reviewed.  A MoveToFile object is
         used as a proxy to implement the processing, checking, and moving of a
         file from a directory location to the reviewed directory.
-
-    Super-Class:  MoveTo
-
-    Sub-Classes:
 
     Methods:
         __init__ -> Class instance initilization.
@@ -304,15 +298,15 @@ class MoveToFile(MoveTo):
             (input) file_path -> Directory path and file to be processed.
             (input) review_dir -> Review directory where file will be moved to.
             (input) dissem_dir -> Dissemination directory for new products.
-            (input) **kwargs:
-                None
 
         """
 
         super(MoveToFile, self).__init__(dissem_dir)
 
+        html_str = ".html"
         self.cur_file_name = os.path.basename(file_path)
         self.cur_file_dir = os.path.dirname(file_path)
+        self.review_dir = review_dir
 
         if not self.dissem_dir.endswith(os.path.sep):
             self.dissem_dir = self.dissem_dir + os.path.sep
@@ -322,9 +316,9 @@ class MoveToFile(MoveTo):
 
         self.zip_file_path = \
             review_dir + self.org + "-" + self.tape_dir \
-            + "-" + re.sub("(?i)" + re.escape(".html"), ".zip",
+            + "-" + re.sub("(?i)" + re.escape(html_str), ".zip",
                            self.cur_file_name)
-        self.xml_file_path = re.sub("(?i)" + re.escape(".html"), ".xml",
+        self.xml_file_path = re.sub("(?i)" + re.escape(html_str), ".xml",
                                     file_path)
         self.xml_file_name = os.path.basename(self.xml_file_path)
         self.dissem_level = ""
@@ -335,6 +329,7 @@ class MoveToFile(MoveTo):
         self.media = []
         self.files_to_zip = []
         self.cleanup_list = []
+        self.product_line = None
 
     def parse_xml_file(self, **kwargs):
 
@@ -343,8 +338,6 @@ class MoveToFile(MoveTo):
         Description:  Parse the XML file using ElementTree library.
 
         Arguments:
-            (input) **kwargs:
-                None
 
         """
 
@@ -377,21 +370,23 @@ class MoveToFile(MoveTo):
             requirements.
 
         Arguments:
-            (input) **kwargs:
-                None
 
         """
 
+        # Done this way due to SonarQube finding.
+        year_regex = "[0-9]{4}-"
+        docid_regex = "[0-9]{8}-" + year_regex
+        docid_regex2 = docid_regex + ".*0901"
+
         if self.product_line in self.product_list:
             # Get document's dissemination level from file name.
-            self.dissem_level = re.sub("-090109c.*.html", "",
-                                       re.sub("[0-9]{8}-[0-9]{4}-", "",
+            self.dissem_level = re.sub(
+                "-090109c.*.html", "", re.sub(docid_regex, "",
                                               self.cur_file_name))
 
             # Get document ID from file name.
-            self.object_id = "0901" + re.sub(".html", "",
-                                             re.sub("[0-9]{8}-[0-9]{4}-.*0901",
-                                                    "", self.cur_file_name))
+            self.object_id = "0901" + re.sub(
+                ".html", "", re.sub(docid_regex2, "", self.cur_file_name))
 
     def add_to_zip(self, file_name, **kwargs):
 
@@ -401,8 +396,6 @@ class MoveToFile(MoveTo):
 
         Arguments:
             (input) file_name -> File name to add to zip list.
-            (input) **kwargs:
-                None
 
         """
 
@@ -416,8 +409,6 @@ class MoveToFile(MoveTo):
 
         Arguments:
             (input) file_name -> File name to add to clean up list.
-            (input) **kwargs:
-                None
 
         """
 

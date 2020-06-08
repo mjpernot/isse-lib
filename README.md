@@ -2,24 +2,21 @@
 # Classification (U)
 
 # Description:
-  This project consists of a number of Python files that are common function libraries and classes for working with an ISSE Guard system.  These programs are not standalone programs, but are available for python programs to utilize.
+  Consists of a number of Python files that are common function libraries and classes for working with an ISSE Guard system.  These programs are not standalone programs, but are available for python programs to utilize.
 
 
 ###  This README file is broken down into the following sections:
  * Prerequisites
  * Installation
- * Configuration
  * Program Description
- * Program Help Function
  * Testing
    - Unit
+   - Integration
 
 
 # Prerequisites:
 
   * List of Linux packages that need to be installed on the server.
-    - python-libs
-    - python-devel
     - git
     - python-pip
 
@@ -28,33 +25,42 @@
 
 
 # Installation:
-There are two types of installs: pip and git.  Pip will only install the program modules and classes, whereas git will install all modules and classes including testing programs along with README and CHANGELOG files.  The Pip installation will be modifying another program's project to install these supporting librarues via pip.
+  There are two types of installs: pip and git.
 
 ### Pip Installation:
-  * Replace **{Python_Project}** with the baseline path of the python program.
   * Replace **{Other_Python_Project}** with the baseline path of another python program.
 
-Create requirement files for the supporting library in another program's project.
+###### Create requirements file in another program's project to install isse-lib as a library module.
 
+Create requirements-isse-lib.txt file:
 ```
-cd {Python_Project}
-cat requirements-isse-lib.txt >> {Other_Python_Project}/requirements-isse-lib.txt
-cat requirements-python-lib.txt >> {Other_Python_Project}/requirements-python-lib.txt
+vim {Other_Python_Project}/requirements-isse-lib.txt
 ```
 
-Place the following commands into the another program's README.md file under the "Install supporting classes and libraries" section.
-   pip install -r requirements-isse-lib.txt --target isse_lib --trusted-host pypi.appdev.proj.coe.ic.gov
-   pip install -r requirements-python-lib.txt --target isse_lib/lib --trusted-host pypi.appdev.proj.coe.ic.gov
+Add the following lines to the requirements-isse-lib.txt file:
+```
+git+ssh://git@sc.appdev.proj.coe.ic.gov/JAC-DSXD/isse-lib.git#egg=isse-lib
+```
 
+Create requirements-python-lib.txt file:
+```
+vim {Other_Python_Project}/requirements-python-lib.txt
+```
+
+Add the following lines to the requirements-python-lib.txt file:
+```
+git+ssh://git@sc.appdev.proj.coe.ic.gov/JAC-DSXD/python-lib.git#egg=python-lib
+```
+
+##### Modify the other program's README.md file to add the pip commands under the "Install supporting classes and libraries" section.
+Modify the README.md file:
 ```
 vim {Other_Python_Project}/README.md
+
+Add the following lines under the "Install supporting classes and libraries" section.
 ```
-
-Add the system module requirements to the another program's requirements.txt file and remove any duplicates.
-
-``
-cat requirements.txt >> {Other_Python_Project}/requirements.txt
-vim {Other_Python_Project}/requirements.txt
+   pip install -r requirements-sftp-lib.txt --target sftp_lib --trusted-host pypi.appdev.proj.coe.ic.gov
+   pip install -r requirements-python-lib.txt --target sftp_lib/lib --trusted-host pypi.appdev.proj.coe.ic.gov
 ```
 
 ### Git Installation:
@@ -67,13 +73,6 @@ cd {Python_Project}
 git clone git@sc.appdev.proj.coe.ic.gov:JAC-DSXD/isse-lib.git
 ```
 
-Install supporting classes and libraries
-
-```
-cd isse-lib
-pip install -r requirements-python-lib.txt --target lib --trusted-host pypi.appdev.proj.coe.ic.gov
-```
-
 Install/upgrade system modules.
 
 ```
@@ -81,6 +80,13 @@ sudo bash
 umask 022
 pip install -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
 exit
+```
+
+Install supporting classes and libraries
+
+```
+cd isse-lib
+pip install -r requirements-python-lib.txt --target lib --trusted-host pypi.appdev.proj.coe.ic.gov
 ```
 
 
@@ -96,7 +102,48 @@ exit
 
 # Unit Testing:
 
-### Description: Testing consists of unit testing for the functions in the isse_guard_class.py program.
+### Installation:
+
+Install general ISSE Guard libraries and classes using git.
+  * Replace **{Python_Project}** with the baseline path of the python program.
+  * Replace **{Branch_Name}** with the name of the Git branch being tested.  See Git Merge Request.
+
+```
+cd {Python_Project}
+git clone --branch {Branch_Name} git@sc.appdev.proj.coe.ic.gov:JAC-DSXD/isse-lib.git
+```
+
+Install/upgrade system modules.
+
+```
+sudo bash
+umask 022
+pip install -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
+exit
+```
+
+Install supporting classes and libraries
+
+```
+cd isse-lib
+pip install -r requirements-python-lib.txt --target lib --trusted-host pypi.appdev.proj.coe.ic.gov
+```
+
+### Testing:
+  * Replace **{Python_Project}** with the baseline path of the python program.
+
+```
+cd {Python_Project}/isse-lib
+test/unit/isse_guard_class/unit_test_run.sh
+```
+
+### Code Coverage:
+```
+cd {Python_Project}/isse-lib
+test/unit/isse_guard_class/code_coverage.sh
+```
+
+# Integration Testing:
 
 ### Installation:
 
@@ -109,13 +156,6 @@ cd {Python_Project}
 git clone --branch {Branch_Name} git@sc.appdev.proj.coe.ic.gov:JAC-DSXD/isse-lib.git
 ```
 
-Install supporting classes and libraries
-
-```
-cd isse-lib
-pip install -r requirements-python-lib.txt --target lib --trusted-host pypi.appdev.proj.coe.ic.gov
-```
-
 Install/upgrade system modules.
 
 ```
@@ -125,25 +165,18 @@ pip install -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic
 exit
 ```
 
-# Unit test runs for isse_guard_class.py:
+Install supporting classes and libraries
+
+```
+cd isse-lib
+pip install -r requirements-python-lib.txt --target lib --trusted-host pypi.appdev.proj.coe.ic.gov
+```
+
+### Testing:
   * Replace **{Python_Project}** with the baseline path of the python program.
 
 ```
 cd {Python_Project}/isse-lib
-```
-
-### Unit:  
-```
-test/unit/isse_guard_class/
-```
-
-### All unit testing
-```
-test/unit/isse_guard_class/unit_test_run.sh
-```
-
-### Code coverage program
-```
-test/unit/isse_guard_class/code_coverage.sh
+test/integration/isse_guard_class/integration_test_run.sh
 ```
 

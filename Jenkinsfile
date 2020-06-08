@@ -8,18 +8,36 @@ pipeline {
         }
         stage('Test') {
             steps {
+                dir ('lib') {
+                    git branch: "master", credentialsId: "2cfb403c-be21-4fac-94d7-c8cd5c531feb", url: "https://gitlab.code.dicelab.net/JAC-IDM/python-lib.git"
+                }
                 sh """
-                pip2 install mock --user
+                virtualenv test_env
+                source test_env/bin/activate
+                pip2 install mock==2.0.0 --user
+                ./test/unit/isse_guard_class/isseguard_init.py
+                ./test/unit/isse_guard_class/isseguard_set_other_files.py
+                ./test/unit/isse_guard_class/moveto_get_files.py
+                ./test/unit/isse_guard_class/moveto_init.py
+                ./test/unit/isse_guard_class/movetofile_add_to_cleanup.py
+                ./test/unit/isse_guard_class/movetofile_add_to_zip.py
+                ./test/unit/isse_guard_class/movetofile_init.py
+                ./test/unit/isse_guard_class/movetofile_parse_xml_file.py
+                ./test/unit/isse_guard_class/movetofile_process_product.py
+                deactivate
+                rm -rf test_env
                 """
             }
         }
         stage('SonarQube analysis') {
             steps {
+                sh './test/unit/sonarqube_code_coverage.sh'
+                sh 'rm -rf lib'
                 script {
                     scannerHome = tool 'sonar-scanner';
                 }
                 withSonarQubeEnv('Sonar') {
-                    sh "${scannerHome}/bin/sonar-scanner"
+                    sh "${scannerHome}/bin/sonar-scanner -Dproject.settings=sonar-project.JACIDM.properties"
                 }
             
             }
@@ -35,13 +53,13 @@ pipeline {
                                 "pattern": "./*.py",
                                 "recursive": false,
                                 "excludePatterns": [],
-                                "target": "generic-local/highpoint/isse-lib/"
+                                "target": "pypi-proj-local/highpoint/git-lib/"
                             },
                             {
                                 "pattern": "./*.txt",
                                 "recursive": false,
                                 "excludePatterns": [],
-                                "target": "generic-local/highpoint/isse-lib/"
+                                "target": "pypi-proj-local/highpoint/git-lib/"
                             },
                             {
                                 "pattern": "./*.md",
@@ -54,6 +72,7 @@ pipeline {
                                 "recursive": true,
                                 "excludePatterns": [],
                                 "target": "generic-local/highpoint/isse-lib/config/"
+                                "target": "pypi-proj-local/highpoint/git-lib/"
                             }
                         ]
                     }"""
