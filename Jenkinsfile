@@ -65,7 +65,7 @@ pipeline {
                                 "pattern": "./*.md",
                                 "recursive": false,
                                 "excludePatterns": [],
-                                "target": "generic-local/highpoint/isse-lib/"
+                                "target": "pypi-proj-local/highpoint/isse-lib/"
                             },
                             {
                                 "pattern": "*.TEMPLATE",
