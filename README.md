@@ -180,3 +180,8 @@ cd {Python_Project}/isse-lib
 test/integration/isse_guard_class/integration_test_run.sh
 ```
 
+```
+cd {Python_Project}/isse-lib
+test/integration/isse_guard_class/code_coverage.sh
+```
+
