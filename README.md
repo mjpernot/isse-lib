@@ -2,7 +2,7 @@
 # Classification (U)
 
 # Description:
-  This project consists of a number of Python files that are common function libraries and classes for working with an ISSE Guard system.  These programs are not standalone programs, but are available for python programs to utilize.
+  Consists of a number of Python files that are common function libraries and classes for working with an ISSE Guard system.  These programs are not standalone programs, but are available for python programs to utilize.
 
 
 ###  This README file is broken down into the following sections:
@@ -11,6 +11,7 @@
  * Program Description
  * Testing
    - Unit
+   - Integration
 
 
 # Prerequisites:
@@ -101,8 +102,6 @@ pip install -r requirements-python-lib.txt --target lib --trusted-host pypi.appd
 
 # Unit Testing:
 
-### Description: Testing consists of unit testing for the functions in the isse_guard_class.py program.
-
 ### Installation:
 
 Install general ISSE Guard libraries and classes using git.
@@ -142,5 +141,42 @@ test/unit/isse_guard_class/unit_test_run.sh
 ```
 cd {Python_Project}/isse-lib
 test/unit/isse_guard_class/code_coverage.sh
+```
+
+# Integration Testing:
+
+### Installation:
+
+Install general ISSE Guard libraries and classes using git.
+  * Replace **{Python_Project}** with the baseline path of the python program.
+  * Replace **{Branch_Name}** with the name of the Git branch being tested.  See Git Merge Request.
+
+```
+cd {Python_Project}
+git clone --branch {Branch_Name} git@sc.appdev.proj.coe.ic.gov:JAC-DSXD/isse-lib.git
+```
+
+Install/upgrade system modules.
+
+```
+sudo bash
+umask 022
+pip install -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
+exit
+```
+
+Install supporting classes and libraries
+
+```
+cd isse-lib
+pip install -r requirements-python-lib.txt --target lib --trusted-host pypi.appdev.proj.coe.ic.gov
+```
+
+### Testing:
+  * Replace **{Python_Project}** with the baseline path of the python program.
+
+```
+cd {Python_Project}/isse-lib
+test/integration/isse_guard_class/integration_test_run.sh
 ```
 
