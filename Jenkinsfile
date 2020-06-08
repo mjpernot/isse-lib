@@ -53,26 +53,19 @@ pipeline {
                                 "pattern": "./*.py",
                                 "recursive": false,
                                 "excludePatterns": [],
-                                "target": "pypi-proj-local/highpoint/git-lib/"
+                                "target": "pypi-proj-local/highpoint/isse-lib/"
                             },
                             {
                                 "pattern": "./*.txt",
                                 "recursive": false,
                                 "excludePatterns": [],
-                                "target": "pypi-proj-local/highpoint/git-lib/"
+                                "target": "pypi-proj-local/highpoint/isse-lib/"
                             },
                             {
                                 "pattern": "./*.md",
                                 "recursive": false,
                                 "excludePatterns": [],
                                 "target": "pypi-proj-local/highpoint/isse-lib/"
-                            },
-                            {
-                                "pattern": "*.TEMPLATE",
-                                "recursive": true,
-                                "excludePatterns": [],
-                                "target": "generic-local/highpoint/isse-lib/config/"
-                                "target": "pypi-proj-local/highpoint/git-lib/"
                             }
                         ]
                     }"""
