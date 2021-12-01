@@ -1,0 +1,12 @@
+This is from the project todo list:
+  -  IsseGuard.set_other_files:  Make other_files the same way in init as other_files_type_dict.  (376)
+  -  IsseGuard:  Bug:  If self.other_files is set up as a list then then changed to a dict.  Initialize as a dictionary.  (994)
+  -  requirements*.txt:  Add tag entry to specify version.  (1143)
+  -  CHANGELOG.md:  Summarize multiple entries into a single entry.  (1201)
+  -  Remove **kwargs from methods and functions not requiring it.  (1260)
+  -  Replace testing install section with reference to main Install section.  (1280)
+  -  Test files:  Change list of Methods to just names only.  (1349)
+  -  README:  Change the library dependency section to use general names.  (1366)
+  -  Jenkinsfile:  Add post stage to clean up workspace.  (1381)
+  -  Library changes to require their own requirements file for their particular install. (1457)
+  -  requirements.txt:  Add "simplejson==2.0.9". (1462)
